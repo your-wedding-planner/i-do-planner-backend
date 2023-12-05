@@ -11,10 +11,11 @@ const saltRounds = 10;
 router.post("/signup", (req, res, next) => {
   const { email, password, name, weddingDate, namePartner } = req.body;
 
-  if (email === "" || password === "" || name === "" || weddingDate === "" || namePartner === "" ) {
+  if (email === "" || password === "" || name === "" || weddingDate instanceof Date && !isNaN(weddingDate) || namePartner === "" ) {
     res.status(400).json({ message: "Provide email, password, name, wedding date and name of partner" });
     return;
   }
+
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   if (!emailRegex.test(email)) {

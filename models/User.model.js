@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const { Schema, model } = require("mongoose");
 
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
@@ -19,13 +20,21 @@ const userSchema = new Schema(
       required: [true, "Name is required."],
     },
     weddingDate: {
-      type: String,
+      type: Date,
       required: [true, "Date of wedding is required."],
     }, 
     namePartner: {
       type: String,
       required: [true, "Name of partner is required."],
-    }
+    },
+    guestList: [{
+        type: mongoose.Schema.Types.ObjectId,
+      ref: "Guest"
+    }],
+    vendorList: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Vendor"
+    }]
     // Photo
     // Location
   },
