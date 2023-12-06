@@ -13,7 +13,7 @@ router.get("/guests", (req, res, next) => {
 
   router.get("/guests/:guestId", (req, res, next) => {
     const { guestId } = req.params;
-    Student.findById(guestId)
+    Guest.findById(guestId)
       .then((guestDetails) => {
         res.status(200).json(guestDetails)
       })
