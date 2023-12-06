@@ -5,7 +5,7 @@ const Vendor = require("../models/Vendor.model")
 router.get("/vendors", (req, res, next) => {
     Vendor.find()
         .then((vendors) => {
-            res.json(vendors)
+            res.status(200).json(vendors)
         })
         .catch((error) => {
             next(error)
@@ -17,7 +17,7 @@ router.get("/vendors/:vendorId", (req, res, next) => {
     
     Vendor.findById(vendorId)
         .then((vendorFromDB) => {
-            res.json(vendorFromDB)
+            res.status(200).json(vendorFromDB)
         })
         .catch((error) => {
             next(error)
@@ -63,7 +63,7 @@ router.put("/vendors/:vendorId", (req, res, next) => {
 
     Vendor.findByIdAndUpdate(vendorId, updatedVendorDetails, {new: true})
         .then(() => {
-            res.send("Vendor is updated")
+            res.status(200).send("Vendor is updated")
             //also send a status?
         })
         .catch((error) => {
@@ -76,7 +76,7 @@ router.delete("/vendors/:vendorId", (req, res, next) => {
     
     Vendor.findByIdAndDelete(vendorId)
         .then(() => {
-            res.send("Vendor was deleted")
+            res.status(204).send("Vendor was deleted")
         })
         .catch((error) => {
             next(error)
