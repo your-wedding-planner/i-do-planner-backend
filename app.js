@@ -18,8 +18,13 @@ const config = require("./config")(app);
 const indexRoutes = require("./routes/index.routes");
 app.use("/api", indexRoutes);
 
+
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
+
+const vendorRoutes = require("./routes/vendor.routes")
+app.use("/api", vendorRoutes) // I left out /vendors, otherwise there won't be anything in some routes in Vendor.Routes
+
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

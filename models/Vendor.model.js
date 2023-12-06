@@ -13,6 +13,9 @@ const vendorSchema = new Schema(
     description: {
       type: String
     },
+    URL : {
+      type: String
+    },
     typeOfService: {
       type: String,
       required: [true, "Type of service is required."],
