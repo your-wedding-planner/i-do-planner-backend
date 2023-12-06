@@ -2,6 +2,7 @@ const dotenv = require("dotenv").config();
 const database = require("./db");
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const User = require("./models/User.model")
 const Guest = require("./models/Guest.model")
@@ -10,6 +11,13 @@ const Vendor = require("./models/Vendor.model")
 const { isAuthenticated } = require("./middleware/jwt.middleware") 
 
 const app = express();
+
+app.use(
+    cors({
+    origin: ["http://localhost:5173", "http://localhost:5005"],
+    })
+    );
+
 
 const config = require("./config")(app);
 
