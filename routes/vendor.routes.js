@@ -7,9 +7,8 @@ router.get("/vendors", (req, res, next) => {
         .then((vendors) => {
             res.json(vendors)
         })
-        .catch((err) => {
-            console.log("Error in getting vendors from DB...", err)
-            // next(err) --> errorhandling middleware
+        .catch((error) => {
+            next(error)
         })
 })
 
@@ -20,9 +19,8 @@ router.get("/vendors/:vendorId", (req, res, next) => {
         .then((vendorFromDB) => {
             res.json(vendorFromDB)
         })
-        .catch((err) => {
-            console.log("Error in getting a specific vendor from DB...", err)
-            // next(err) --> errorhandling middleware
+        .catch((error) => {
+            next(error)
         })
 })
 
@@ -43,9 +41,8 @@ router.post("/vendors", (req, res, next) => {
         .then(() => {
             res.status(201).send("Vendor was created")
         })
-        .catch((err) => {
-            console.log("Error in creating a vendor in DB...", err)
-            // next(err) --> errorhandling middleware
+        .catch((error) => {
+            next(error)
         })
 })
 
@@ -69,11 +66,9 @@ router.put("/vendors/:vendorId", (req, res, next) => {
             res.send("Vendor is updated")
             //also send a status?
         })
-        .catch((err) => {
-            console.log("Error in updating a vendor in DB...", err)
-            // next(err) --> errorhandling middleware
-        })
-        
+        .catch((error) => {
+            next(error)
+        })        
 })
 
 router.delete("/vendors/:vendorId", (req, res, next) => {
@@ -83,9 +78,8 @@ router.delete("/vendors/:vendorId", (req, res, next) => {
         .then(() => {
             res.send("Vendor was deleted")
         })
-        .catch((err) => {
-            console.log("Error in deleting a vendor in DB...", err)
-            // next(err) --> errorhandling middleware
+        .catch((error) => {
+            next(error)
         })
 })   
 
