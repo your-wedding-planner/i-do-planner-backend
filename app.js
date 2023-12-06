@@ -17,6 +17,13 @@ app.use(
     })
   );
 
+app.use(
+    cors({
+    origin: ["http://localhost:5173", "http://localhost:5005"],
+    })
+    );
+
+
 const config = require("./config")(app);
 
 

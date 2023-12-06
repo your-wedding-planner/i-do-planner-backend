@@ -5,11 +5,10 @@ const Vendor = require("../models/Vendor.model")
 router.get("/vendors", (req, res, next) => {
     Vendor.find()
         .then((vendors) => {
-            res.json(vendors)
+            res.status(200).json(vendors)
         })
-        .catch((err) => {
-            console.log("Error in getting vendors from DB...", err)
-            // next(err) --> errorhandling middleware
+        .catch((error) => {
+            next(error)
         })
 })
 
@@ -18,11 +17,10 @@ router.get("/vendors/:vendorId", (req, res, next) => {
     
     Vendor.findById(vendorId)
         .then((vendorFromDB) => {
-            res.json(vendorFromDB)
+            res.status(200).json(vendorFromDB)
         })
-        .catch((err) => {
-            console.log("Error in getting a specific vendor from DB...", err)
-            // next(err) --> errorhandling middleware
+        .catch((error) => {
+            next(error)
         })
 })
 
@@ -43,9 +41,8 @@ router.post("/vendors", (req, res, next) => {
         .then(() => {
             res.status(201).send("Vendor was created")
         })
-        .catch((err) => {
-            console.log("Error in creating a vendor in DB...", err)
-            // next(err) --> errorhandling middleware
+        .catch((error) => {
+            next(error)
         })
 })
 
@@ -66,14 +63,12 @@ router.put("/vendors/:vendorId", (req, res, next) => {
 
     Vendor.findByIdAndUpdate(vendorId, updatedVendorDetails, {new: true})
         .then(() => {
-            res.send("Vendor is updated")
+            res.status(200).send("Vendor is updated")
             //also send a status?
         })
-        .catch((err) => {
-            console.log("Error in updating a vendor in DB...", err)
-            // next(err) --> errorhandling middleware
-        })
-        
+        .catch((error) => {
+            next(error)
+        })        
 })
 
 router.delete("/vendors/:vendorId", (req, res, next) => {
@@ -81,11 +76,10 @@ router.delete("/vendors/:vendorId", (req, res, next) => {
     
     Vendor.findByIdAndDelete(vendorId)
         .then(() => {
-            res.send("Vendor was deleted")
+            res.status(204).send("Vendor was deleted")
         })
-        .catch((err) => {
-            console.log("Error in deleting a vendor in DB...", err)
-            // next(err) --> errorhandling middleware
+        .catch((error) => {
+            next(error)
         })
 })   
 
