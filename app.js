@@ -11,11 +11,6 @@ const Vendor = require("./models/Vendor.model")
 const { isAuthenticated } = require("./middleware/jwt.middleware") 
 
 const app = express();
-app.use(
-    cors({
-      origin: ['http://localhost:5174', 'http://localhost:5005/'],
-    })
-  );
 
 app.use(
     cors({
