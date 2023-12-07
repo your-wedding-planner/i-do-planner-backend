@@ -8,7 +8,7 @@ const vendorSchema = new Schema(
     },
     location: {
       type: String,
-      required: [true, "Name is required."],
+      required: [true, "Location is required."],
     },
     description: {
       type: String
