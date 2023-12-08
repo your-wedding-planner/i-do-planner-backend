@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Vendor = require("../models/Vendor.model")
 
 router.get("/vendors", (req, res, next) => {
-    Vendor.find()
+    Vendor.find({createdBy: req.payload._id})
         .then((vendors) => {
             res.status(200).json(vendors)
         })
@@ -34,7 +34,8 @@ router.post("/vendors", (req, res, next) => {
         URL,
         typeOfService,
         email,
-        phoneNumber
+        phoneNumber,
+        createdBy: req.payload._id
     }
 
     Vendor.create(newVendorDetails)
