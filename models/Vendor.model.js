@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
 
 const vendorSchema = new Schema(
   {
@@ -30,6 +31,10 @@ const vendorSchema = new Schema(
     },
     phoneNumber: {
       type: String,
+    },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
 
   },

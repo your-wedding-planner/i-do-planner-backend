@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
 
 const guestSchema = new Schema(
   {
@@ -34,6 +35,10 @@ const guestSchema = new Schema(
       type: String,
       required: [true, "Attending is required."],
       enum: ["Attending", "Pending", "Declined"]
+    },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     // menu: {
     //   type: String,

@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const Guest = require('../models/Guest.model');
 
 router.get("/guests", (req, res, next) => {
-    Guest.find()
+  console.log(req.payload)
+    Guest.find({createdBy: req.payload._id})
       .then((guestsArr) => {
         res.status(200).json(guestsArr)
       })
@@ -25,6 +26,7 @@ router.get("/guests", (req, res, next) => {
 
   router.post("/guests", (req, res, next) => {
     const { firstName, lastName, age, email, phoneNumber, notes, attending } = req.body;
+    
     const newRequestBody = {
       firstName,
       lastName,
@@ -32,7 +34,8 @@ router.get("/guests", (req, res, next) => {
       email,
       phoneNumber,
       notes,
-      attending
+      attending,
+      createdBy: req.payload._id
     }
   
     Guest.create(newRequestBody)
