@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const mongoose = require("mongoose");
 const Guest = require('../models/Guest.model');
 
 router.get("/guests", (req, res, next) => {
@@ -35,8 +36,8 @@ router.get("/guests", (req, res, next) => {
     }
   
     Guest.create(newRequestBody)
-      .then((createdGuest) => {
-        res.status(201).json(createdGuest)
+      .then(() => {
+        res.status(201).json("Guest was created")
       })
       .catch((error) => {
         next(error)
