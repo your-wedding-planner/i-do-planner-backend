@@ -59,13 +59,13 @@ router.put("/vendors/:vendorId", (req, res, next) => {
         URL,
         typeOfService,
         email,
-        phoneNumber
+        phoneNumber,
+        createdBy
     }
 
     Vendor.findByIdAndUpdate(vendorId, updatedVendorDetails, {new: true})
         .then(() => {
             res.status(200).send("Vendor is updated")
-            //also send a status?
         })
         .catch((error) => {
             next(error)

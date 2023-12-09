@@ -27,11 +27,15 @@ app.use("/api", indexRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
+const costItemRoutes = require("./routes/costItem.routes")
+app.use("/api", costItemRoutes)
+
 const guestRoutes = require("./routes/guest.routes")
 app.use("/api", isAuthenticated, guestRoutes);
 
 const vendorRoutes = require("./routes/vendor.routes")
-app.use("/api", isAuthenticated, vendorRoutes) // I left out /vendors, otherwise there won't be anything in some routes in Vendor.Routes
+app.use("/api", isAuthenticated, vendorRoutes) 
+
 
 
 

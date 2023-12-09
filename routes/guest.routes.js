@@ -58,7 +58,8 @@ router.get("/guests", (req, res, next) => {
       email,
       phoneNumber,
       notes,
-      attending
+      attending, 
+      createdBy
     }
     
       Guest.findByIdAndUpdate(guestId,newRequestBody,{new:true})
