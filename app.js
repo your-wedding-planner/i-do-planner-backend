@@ -28,7 +28,7 @@ const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
 const costItemRoutes = require("./routes/costItem.routes")
-app.use("/api", costItemRoutes)
+app.use("/api", isAuthenticated, costItemRoutes)
 
 const guestRoutes = require("./routes/guest.routes")
 app.use("/api", isAuthenticated, guestRoutes);

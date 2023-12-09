@@ -27,12 +27,13 @@ router.get("/costItems/:costItemId", (req, res, next) => {
 router.post("/costItems", (req, res, next) => {
     const {nameVendor, price, description, typeOfCost} = req.body
 
+    console.log(req.payload)
     const newCostItemDetails = {
         nameVendor,
         price,
         description,
         typeOfCost,
-        //createdBy: req.payload._id
+        createdBy: req.payload._id
     }
 
     CostItem.create(newCostItemDetails)
