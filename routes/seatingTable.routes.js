@@ -3,7 +3,7 @@ const SeatingTable = require("../models/SeatingTable.model");
 
 router.get("/seatingTables", (req, res, next) => {
   console.log(req.payload);
-  SeatingTable.find({ createdBy: req.payload._id })
+  SeatingTable.find({ createdBy: req.payload._id }).populate("assignedGuests")
     .then((tablesArray) => {
       res.status(200).json(tablesArray);
     })

@@ -49,7 +49,7 @@ router.get("/guests", (req, res, next) => {
 
   router.put("/guests/:guestId", (req, res, next) => {
     const {guestId} = req.params;
-    const { firstName, lastName, age, email, phoneNumber, notes, attending } = req.body;
+    const { firstName, lastName, age, email, phoneNumber, notes, attending, seatingTable } = req.body;
     const newRequestBody = {
       firstName,
       lastName,
@@ -57,7 +57,8 @@ router.get("/guests", (req, res, next) => {
       email,
       phoneNumber,
       notes,
-      attending, 
+      attending,
+      seatingTable,
       createdBy: req.payload._id
     }
     
