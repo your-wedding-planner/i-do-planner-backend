@@ -59,7 +59,7 @@ router.get("/guests", (req, res, next) => {
       phoneNumber,
       notes,
       attending, 
-      createdBy
+      createdBy: req.payload._id
     }
     
       Guest.findByIdAndUpdate(guestId,newRequestBody,{new:true})
