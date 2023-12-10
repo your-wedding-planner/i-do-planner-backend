@@ -36,8 +36,8 @@ app.use("/api", isAuthenticated, guestRoutes);
 const vendorRoutes = require("./routes/vendor.routes")
 app.use("/api", isAuthenticated, vendorRoutes) 
 
-
-
+const seatingTablesRoutes = require("./routes/seatingTable.routes")
+app.use("/api", isAuthenticated, seatingTablesRoutes)
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
