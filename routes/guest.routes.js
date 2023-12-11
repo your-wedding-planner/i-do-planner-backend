@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Guest = require('../models/Guest.model');
 
 router.get("/guests", (req, res, next) => {
-  console.log(req.payload)
+  console.log('This is get guests', req.payload)
     Guest.find({createdBy: req.payload._id})
       .then((guestsArr) => {
         res.status(200).json(guestsArr)

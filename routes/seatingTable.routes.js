@@ -2,7 +2,7 @@ const router = require("express").Router();
 const SeatingTable = require("../models/SeatingTable.model");
 
 router.get("/seatingTables", (req, res, next) => {
-  console.log(req.payload);
+  console.log('This is get seatingTables', req.payload);
   SeatingTable.find({ createdBy: req.payload._id }).populate("assignedGuests")
     .then((tablesArray) => {
       res.status(200).json(tablesArray);

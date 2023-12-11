@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const CostItem = require("../models/CostItem.model")
 
 router.get("/costItems", (req, res, next) => {
+    console.log('This is get costs items', req.payload)
     CostItem.find({createdBy: req.payload._id})
         .then((costItems) => {
             res.status(200).json(costItems)
@@ -27,7 +28,7 @@ router.get("/costItems/:costItemId", (req, res, next) => {
 router.post("/costItems", (req, res, next) => {
     const {nameVendor, price, description, typeOfCost} = req.body
 
-    console.log(req.payload)
+    console.log('This is post cost Items',req.payload)
     const newCostItemDetails = {
         nameVendor,
         price,
