@@ -5,17 +5,17 @@ const guestSchema = new Schema(
   {
     firstName: {
       type: String,
-      required: [true, "First name is required."]
+      required: [true, "First name is required."],
     },
     lastName: {
       type: String,
-      required: [true, "Last name is required."]
+      required: [true, "Last name is required."],
     },
     age: {
       type: String,
       required: [true, "Age is required."],
-      enum: ["Adult", "Child", "Baby"]
-    }, 
+      enum: ["Adult", "Child", "Baby"],
+    },
     // table: {
     //   type: Number,
     //   // create enum (or tableId?) for bonus (tables need to be created first)
@@ -29,12 +29,17 @@ const guestSchema = new Schema(
       type: String,
     },
     notes: {
-      type: String
+      type: String,
     },
     attending: {
       type: String,
       required: [true, "Attending is required."],
-      enum: ["Attending", "Pending", "Declined"]
+      enum: ["Attending", "Pending", "Declined"],
+    },
+    seatingTable: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "SeatingTable",
+      default: null,
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,

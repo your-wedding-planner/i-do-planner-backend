@@ -60,7 +60,7 @@ router.put("/vendors/:vendorId", (req, res, next) => {
         typeOfService,
         email,
         phoneNumber,
-        createdBy
+        createdBy: req.payload._id
     }
 
     Vendor.findByIdAndUpdate(vendorId, updatedVendorDetails, {new: true})

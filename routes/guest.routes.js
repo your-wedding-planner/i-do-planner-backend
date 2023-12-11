@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const mongoose = require("mongoose");
 const Guest = require('../models/Guest.model');
 
 router.get("/guests", (req, res, next) => {
@@ -25,7 +24,7 @@ router.get("/guests", (req, res, next) => {
   })
 
   router.post("/guests", (req, res, next) => {
-    const { firstName, lastName, age, email, phoneNumber, notes, attending } = req.body;
+    const { firstName, lastName, age, email, phoneNumber, notes, attending, seatingTable } = req.body;
     
     const newRequestBody = {
       firstName,
@@ -35,12 +34,13 @@ router.get("/guests", (req, res, next) => {
       phoneNumber,
       notes,
       attending,
+      seatingTable,
       createdBy: req.payload._id
     }
   
     Guest.create(newRequestBody)
-      .then(() => {
-        res.status(201).json("Guest was created")
+      .then((createdGuest) => {
+        res.status(201).json(createdGuest)
       })
       .catch((error) => {
         next(error)
@@ -50,7 +50,7 @@ router.get("/guests", (req, res, next) => {
 
   router.put("/guests/:guestId", (req, res, next) => {
     const {guestId} = req.params;
-    const { firstName, lastName, age, email, phoneNumber, notes, attending } = req.body;
+    const { firstName, lastName, age, email, phoneNumber, notes, attending, seatingTable } = req.body;
     const newRequestBody = {
       firstName,
       lastName,
@@ -58,8 +58,9 @@ router.get("/guests", (req, res, next) => {
       email,
       phoneNumber,
       notes,
-      attending, 
-      createdBy
+      attending,
+      seatingTable,
+      createdBy: req.payload._id
     }
     
       Guest.findByIdAndUpdate(guestId,newRequestBody,{new:true})
