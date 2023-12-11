@@ -13,9 +13,9 @@ router.get("/seatingTables", (req, res, next) => {
 });
 
 router.post("/seatingTables", (req, res, next) => {
-  const { nameOfTable, assignedGuests } = req.body();
+  const { tableName, assignedGuests } = req.body;
   const newRequestBody = {
-    nameOfTable,
+    tableName,
     assignedGuests,
     createdBy: req.payload._id,
   };
@@ -31,9 +31,9 @@ router.post("/seatingTables", (req, res, next) => {
 
 router.put("/seatingTables/:tableId", (req, res, next) => {
   const { tableId } = req.params;
-  const { nameOfTable, assignedGuests } = req.body;
+  const { tableName, assignedGuests } = req.body;
   const newRequestBody = {
-    nameOfTable,
+    tableName,
     assignedGuests,
     createdBy: req.payload._id,
   };

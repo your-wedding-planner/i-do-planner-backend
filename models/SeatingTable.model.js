@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 const mongoose = require("mongoose");
 
 const seatingTableSchema = new Schema({
-  nameOfTable: {
+  tableName: {
     type: String,
     required: [true, "Name of table is required."],
   },
