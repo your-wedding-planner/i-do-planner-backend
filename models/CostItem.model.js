@@ -35,6 +35,6 @@ const costItemSchema = new Schema(
   }
 );
 
-const CostItem = model("Budget", costItemSchema);
+const CostItem = model("CostItem", costItemSchema);
 
 module.exports = CostItem;

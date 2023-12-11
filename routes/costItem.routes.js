@@ -55,7 +55,7 @@ router.put("/costItems/:costItemId", (req, res, next) => {
         price,
         description,
         typeOfCost,
-        //createdBy: req.payload._id
+        createdBy: req.payload._id
     }
 
     CostItem.findByIdAndUpdate(costItemId, updatedCostItemDetails, {new: true})
