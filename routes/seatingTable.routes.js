@@ -12,6 +12,17 @@ router.get("/seatingTables", (req, res, next) => {
     });
 });
 
+router.get("/seatingTables/:tableId", (req, res, next) => {
+  const { tableId } = req.params;
+  SeatingTable.findById(tableId)
+  .then((seatingTableDetails) => {
+    res.status(200).json(seatingTableDetails)
+  })
+  .catch((error) => {
+    next(error)
+  })
+})
+
 router.post("/seatingTables", (req, res, next) => {
   const { tableName, assignedGuests } = req.body;
   const newRequestBody = {
