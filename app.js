@@ -30,9 +30,6 @@ app.use("/auth", authRoutes);
 const costItemRoutes = require("./routes/costItem.routes")
 app.use("/api", isAuthenticated, costItemRoutes)
 
-const budgetRoutes = require("./routes/budget.routes")
-app.use("/api", budgetRoutes)
-
 const guestRoutes = require("./routes/guest.routes")
 app.use("/api", isAuthenticated, guestRoutes);
 
