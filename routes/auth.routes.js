@@ -9,10 +9,10 @@ const { isAuthenticated } = require("../middleware/jwt.middleware.js");
 const saltRounds = 10;
 
 router.post("/signup", (req, res, next) => {
-  const { email, password, name, weddingDate, namePartner } = req.body;
+  const { email, password, name, weddingDate, namePartner, weddingBudget } = req.body;
 
-  if (email === "" || password === "" || name === "" || weddingDate instanceof Date && !isNaN(weddingDate) || namePartner === "" ) {
-    res.status(400).json({ message: "Provide email, password, name, wedding date and name of partner" });
+  if (email === "" || password === "" || name === "" || weddingDate instanceof Date && !isNaN(weddingDate) || namePartner === "" || weddingBudget === 0) {
+    res.status(400).json({ message: "Provide email, password, name, wedding date, name of partner and budget of wedding" });
     return;
   }
 
@@ -42,13 +42,13 @@ router.post("/signup", (req, res, next) => {
       const salt = bcrypt.genSaltSync(saltRounds);
       const hashedPassword = bcrypt.hashSync(password, salt);
 
-      return User.create({ email, password: hashedPassword, name, weddingDate, namePartner });
+      return User.create({ email, password: hashedPassword, name, weddingDate, namePartner, weddingBudget });
     })
     .then((createdUser) => {
 
-      const { email, name, _id, weddingDate, namePartner } = createdUser;
+      const { email, name, _id, weddingDate, namePartner, weddingBudget } = createdUser;
 
-      const user = { email, name, _id, weddingDate, namePartner };
+      const user = { email, name, _id, weddingDate, namePartner, weddingBudget };
 
       res.status(201).json({ user: user });
     })
@@ -73,9 +73,9 @@ router.post("/login", (req, res, next) => {
       const passwordCorrect = bcrypt.compareSync(password, foundUser.password);
 
       if (passwordCorrect) {
-        const { _id, email, name, weddingDate, namePartner } = foundUser;
+        const { _id, email, name, weddingDate, namePartner, weddingBudget } = foundUser;
 
-        const payload = { _id, email, name, weddingDate, namePartner };
+        const payload = { _id, email, name, weddingDate, namePartner, weddingBudget };
 
         const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
           algorithm: "HS256",

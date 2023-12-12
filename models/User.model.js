@@ -27,14 +27,19 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Name of partner is required."],
     },
-    guestList: [{
-        type: mongoose.Schema.Types.ObjectId,
-      ref: "Guest"
-    }],
-    vendorList: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Vendor"
-    }]
+    weddingBudget: {
+      type: Number,
+      min: 1,
+      required: [true, "Budget of wedding is required"]
+    }
+    // guestList: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Guest"
+    // }],
+    // vendorList: [{
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Vendor"
+    // }]
     // Photo
     // Location
   },
