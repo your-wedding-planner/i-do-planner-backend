@@ -4,6 +4,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+const originUrl = process.env.ORIGIN || "http://localhost:5174";
+
 const User = require("./models/User.model")
 const Guest = require("./models/Guest.model")
 const Vendor = require("./models/Vendor.model")
@@ -14,7 +16,7 @@ const app = express();
 
 app.use(
     cors({
-    origin: ["http://localhost:5174", "http://localhost:5005"],
+    origin: [originUrl],
     })
     );
 
