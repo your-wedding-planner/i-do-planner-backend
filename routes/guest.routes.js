@@ -24,7 +24,7 @@ router.get("/guests", (req, res, next) => {
   })
 
   router.post("/guests", (req, res, next) => {
-    const { firstName, lastName, age, email, phoneNumber, notes, attending, seatingTable } = req.body;
+    const { firstName, lastName, age, email, phoneNumber, notes, attending, seatingTable, createdBy } = req.body;
     
     const newRequestBody = {
       firstName,
@@ -35,7 +35,7 @@ router.get("/guests", (req, res, next) => {
       notes,
       attending,
       seatingTable,
-      createdBy: req.payload._id
+      createdBy
     }
   
     Guest.create(newRequestBody)
@@ -50,7 +50,7 @@ router.get("/guests", (req, res, next) => {
 
   router.put("/guests/:guestId", (req, res, next) => {
     const {guestId} = req.params;
-    const { firstName, lastName, age, email, phoneNumber, notes, attending, seatingTable } = req.body;
+    const { firstName, lastName, age, email, phoneNumber, notes, attending, seatingTable, createdBy } = req.body;
     const newRequestBody = {
       firstName,
       lastName,
@@ -60,7 +60,7 @@ router.get("/guests", (req, res, next) => {
       notes,
       attending,
       seatingTable,
-      createdBy: req.payload._id
+      createdBy
     }
     
       Guest.findByIdAndUpdate(guestId,newRequestBody,{new:true})

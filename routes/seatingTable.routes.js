@@ -24,11 +24,11 @@ router.get("/seatingTables/:tableId", (req, res, next) => {
 })
 
 router.post("/seatingTables", (req, res, next) => {
-  const { tableName, assignedGuests } = req.body;
+  const { tableName, assignedGuests, createdBy } = req.body;
   const newRequestBody = {
     tableName,
     assignedGuests,
-    createdBy: req.payload._id,
+    createdBy
   };
 
   SeatingTable.create(newRequestBody)
@@ -42,11 +42,11 @@ router.post("/seatingTables", (req, res, next) => {
 
 router.put("/seatingTables/:tableId", (req, res, next) => {
   const { tableId } = req.params;
-  const { tableName, assignedGuests } = req.body;
+  const { tableName, assignedGuests, createdBy } = req.body;
   const newRequestBody = {
     tableName,
     assignedGuests,
-    createdBy: req.payload._id,
+    createdBy
   };
 
   SeatingTable.findByIdAndUpdate(tableId, newRequestBody, { new: true })

@@ -26,7 +26,7 @@ router.get("/costItems/:costItemId", (req, res, next) => {
 })
 
 router.post("/costItems", (req, res, next) => {
-    const {nameVendor, price, description, typeOfCost} = req.body
+    const {nameVendor, price, description, typeOfCost, createdBy} = req.body
 
     console.log('This is post cost Items',req.payload)
     const newCostItemDetails = {
@@ -34,7 +34,7 @@ router.post("/costItems", (req, res, next) => {
         price,
         description,
         typeOfCost,
-        createdBy: req.payload._id
+        createdBy
     }
 
     CostItem.create(newCostItemDetails)
@@ -49,14 +49,14 @@ router.post("/costItems", (req, res, next) => {
 router.put("/costItems/:costItemId", (req, res, next) => {
     const {costItemId} = req.params
 
-    const {nameVendor, price, description, typeOfCost} = req.body
+    const {nameVendor, price, description, typeOfCost, createdBy} = req.body
 
     const updatedCostItemDetails = {
         nameVendor,
         price,
         description,
         typeOfCost,
-        createdBy: req.payload._id
+        createdBy
     }
 
     CostItem.findByIdAndUpdate(costItemId, updatedCostItemDetails, {new: true})
