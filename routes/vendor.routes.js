@@ -25,7 +25,7 @@ router.get("/vendors/:vendorId", (req, res, next) => {
 })
 
 router.post("/vendors", (req, res, next) => {
-    const {name, location, description, URL, typeOfService, email, phoneNumber, createdBy } = req.body
+    const {name, location, description, URL, typeOfService, email, phoneNumber } = req.body
 
     const newVendorDetails = {
         name, 
@@ -34,11 +34,10 @@ router.post("/vendors", (req, res, next) => {
         URL,
         typeOfService,
         email,
-        phoneNumber,
-        createdBy
+        phoneNumber
     }
 
-    Vendor.create(newVendorDetails)
+    Vendor.create({...newVendorDetails, createdBy: req.payload._id })
         .then(() => {
             res.status(201).send("Vendor was created")
         })
@@ -50,7 +49,7 @@ router.post("/vendors", (req, res, next) => {
 router.put("/vendors/:vendorId", (req, res, next) => {
     const {vendorId} = req.params
 
-    const {name, location, description, URL, typeOfService, email, phoneNumber, createdBy } = req.body
+    const {name, location, description, URL, typeOfService, email, phoneNumber} = req.body
 
     const updatedVendorDetails = {
         name, 
@@ -59,11 +58,10 @@ router.put("/vendors/:vendorId", (req, res, next) => {
         URL,
         typeOfService,
         email,
-        phoneNumber,
-        createdBy
+        phoneNumber
     }
 
-    Vendor.findByIdAndUpdate(vendorId, updatedVendorDetails, {new: true})
+    Vendor.findByIdAndUpdate(vendorId, {...updatedVendorDetails, createdBy: req.payload._id }, {new: true})
         .then(() => {
             res.status(200).send("Vendor is updated")
         })

@@ -26,18 +26,17 @@ router.get("/costItems/:costItemId", (req, res, next) => {
 })
 
 router.post("/costItems", (req, res, next) => {
-    const {nameVendor, price, description, typeOfCost, createdBy} = req.body
+    const {nameVendor, price, description, typeOfCost } = req.body
 
     console.log('This is post cost Items',req.payload)
     const newCostItemDetails = {
         nameVendor,
         price,
         description,
-        typeOfCost,
-        createdBy
+        typeOfCost
     }
 
-    CostItem.create(newCostItemDetails)
+    CostItem.create({...newCostItemDetails, createdBy: req.payload._id })
         .then(() => {
             res.status(201).send("CostItem was created")
         })
@@ -49,17 +48,16 @@ router.post("/costItems", (req, res, next) => {
 router.put("/costItems/:costItemId", (req, res, next) => {
     const {costItemId} = req.params
 
-    const {nameVendor, price, description, typeOfCost, createdBy} = req.body
+    const {nameVendor, price, description, typeOfCost} = req.body
 
     const updatedCostItemDetails = {
         nameVendor,
         price,
         description,
         typeOfCost,
-        createdBy
     }
 
-    CostItem.findByIdAndUpdate(costItemId, updatedCostItemDetails, {new: true})
+    CostItem.findByIdAndUpdate(costItemId, {...updatedCostItemDetails, createdBy: req.payload._id }, {new: true})
         .then(() => {
             res.status(200).send("CostItem is updated")
         })

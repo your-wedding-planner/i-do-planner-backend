@@ -2,7 +2,6 @@ const router = require("express").Router();
 const SeatingTable = require("../models/SeatingTable.model");
 
 router.get("/seatingTables", (req, res, next) => {
-  console.log('This is get seatingTables', req.payload);
   SeatingTable.find({ createdBy: req.payload._id }).populate("assignedGuests")
     .then((tablesArray) => {
       res.status(200).json(tablesArray);
@@ -24,14 +23,14 @@ router.get("/seatingTables/:tableId", (req, res, next) => {
 })
 
 router.post("/seatingTables", (req, res, next) => {
-  const { tableName, assignedGuests, createdBy } = req.body;
+  const { tableName, assignedGuests} = req.body;
   const newRequestBody = {
     tableName,
-    assignedGuests,
-    createdBy
-  };
+    assignedGuests
 
-  SeatingTable.create(newRequestBody)
+  };
+console.log(req.body);
+  SeatingTable.create({...newRequestBody, createdBy: req.payload._id})
     .then(() => {
       res.status(201).json("Seating Table was created");
     })
@@ -42,14 +41,14 @@ router.post("/seatingTables", (req, res, next) => {
 
 router.put("/seatingTables/:tableId", (req, res, next) => {
   const { tableId } = req.params;
-  const { tableName, assignedGuests, createdBy } = req.body;
+  const { tableName, assignedGuests} = req.body;
   const newRequestBody = {
     tableName,
-    assignedGuests,
-    createdBy
+    assignedGuests
+    
   };
 
-  SeatingTable.findByIdAndUpdate(tableId, newRequestBody, { new: true })
+  SeatingTable.findByIdAndUpdate(tableId, {...newRequestBody, createdBy: req.payload._id}, { new: true })
     .then((updatedTable) => {
       res.status(200).json(updatedTable);
     })

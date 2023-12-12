@@ -24,7 +24,7 @@ router.get("/guests", (req, res, next) => {
   })
 
   router.post("/guests", (req, res, next) => {
-    const { firstName, lastName, age, email, phoneNumber, notes, attending, seatingTable, createdBy } = req.body;
+    const { firstName, lastName, age, email, phoneNumber, notes, attending, seatingTable } = req.body;
     
     const newRequestBody = {
       firstName,
@@ -35,10 +35,9 @@ router.get("/guests", (req, res, next) => {
       notes,
       attending,
       seatingTable,
-      createdBy
     }
   
-    Guest.create(newRequestBody)
+    Guest.create({...newRequestBody, createdBy: req.payload._id })
       .then((createdGuest) => {
         res.status(201).json(createdGuest)
       })
@@ -50,7 +49,7 @@ router.get("/guests", (req, res, next) => {
 
   router.put("/guests/:guestId", (req, res, next) => {
     const {guestId} = req.params;
-    const { firstName, lastName, age, email, phoneNumber, notes, attending, seatingTable, createdBy } = req.body;
+    const { firstName, lastName, age, email, phoneNumber, notes, attending, seatingTable } = req.body;
     const newRequestBody = {
       firstName,
       lastName,
@@ -60,10 +59,9 @@ router.get("/guests", (req, res, next) => {
       notes,
       attending,
       seatingTable,
-      createdBy
     }
     
-      Guest.findByIdAndUpdate(guestId,newRequestBody,{new:true})
+      Guest.findByIdAndUpdate(guestId,{...newRequestBody, createdBy: req.payload._id },{new:true})
         .then((updatedGuest) => {
           res.status(200).json(updatedGuest)
         })
