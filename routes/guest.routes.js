@@ -4,6 +4,7 @@ const Guest = require('../models/Guest.model');
 router.get("/guests", (req, res, next) => {
   console.log('This is get guests', req.payload)
     Guest.find({createdBy: req.payload._id})
+    .populate("seatingTable")
       .then((guestsArr) => {
         res.status(200).json(guestsArr)
       })
